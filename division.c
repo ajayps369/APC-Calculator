@@ -41,14 +41,16 @@ int do_division(Dlist**head2,Dlist**tail2,Dlist*res1_h,Dlist*res1_t,Dlist**head3
     int quotient=0;
     while(compare_list(*head2,*tail2,res1_h,res1_t,temp)==SUCCESS)
     {
-        quotient++;
-        substraction(&res1_h,&res1_t,head2,tail2,head3,tail3);
-        delete_list(&res1_h,&res1_t);
-        res1_h=*head3;
-        res1_t=*tail3;
-        *head3=NULL;
-        *tail3=NULL;
-    }
+    quotient++;
+    Dlist* tmp_h = NULL;
+    Dlist* tmp_t = NULL;
+    substraction(&res1_h, &res1_t, head2, tail2, &tmp_h, &tmp_t);
+    delete_list(&res1_h, &res1_t);
+    res1_h = tmp_h;
+    res1_t = tmp_t;
+}
+insert_at_last(Q_h, Q_t, quotient);
+
     printf("Divident\n");
     print_list(res1_h);
     insert_at_last(Q_h,Q_t,quotient);
